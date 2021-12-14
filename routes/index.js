@@ -11,8 +11,6 @@ routes.get("/club", indexController.getClub)
 routes.get("/club/:id", indexController.getClub)
 routes.get("/fixture", indexController.getClub)
 
-
-
 routes.use(errorHandler)
 
 module.exports = routes
