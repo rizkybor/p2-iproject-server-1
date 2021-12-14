@@ -12,7 +12,7 @@ class indexControllers {
                 params: {date: `${dates}`}
             });
             
-            console.(fixture)
+            console.log(league)
         }
         catch(err){
             next (err)
