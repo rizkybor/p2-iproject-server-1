@@ -5,7 +5,7 @@ const indexController = require("../controllers/indexController")
 const errorHandler = require("../errorHandler/index")
 
 routes.post("/register", userController.register)
-routes.post("/login", userController.register)
+routes.post("/login", userController.login)
 
 routes.get("/club", indexController.getClub)
 routes.get("/club/:id", indexController.getClub)
