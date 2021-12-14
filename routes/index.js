@@ -7,9 +7,9 @@ const errorHandler = require("../errorHandler/index")
 routes.post("/register", userController.register)
 routes.post("/login", userController.login)
 
-routes.get("/club", indexController.getClub)
-routes.get("/club/:id", indexController.getClub)
-routes.get("/fixture", indexController.getClub)
+routes.get("/fixture", indexController.getFixture)
+routes.get("/league", indexController.getLeague)
+routes.get("/league/:country", indexController.getLeagueByCountry)
 
 routes.use(errorHandler)
 
