@@ -57,6 +57,24 @@ class indexControllers {
             next (err)
         }
     }
+
+    static async postBookmark (req, res, next) {
+        try {
+            console.log('testing')
+        }
+        catch(err){
+            next (err)
+        }
+    }
+
+    static async getBookmark (req, res, next) {
+        try {
+            console.log('testing')
+        }
+        catch(err){
+            next (err)
+        }
+    }
 }
 
 module.exports = indexControllers
