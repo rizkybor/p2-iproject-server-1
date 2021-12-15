@@ -5,14 +5,15 @@ const footballAPI = require("../apis/football")
 class indexControllers {
     static async getFixture (req, res, next) {
         try {
-            const {dates} = req.params
+            const {date} = req.params
+
             const fixture = await footballAPI({
                 method: 'GET',
                 url: '/fixtures',
-                params: {date: `${dates}`}
+                params: {date: `${date}`}
             });
-            
-            console.log(league)
+            const fetchFixture = fixture.data.response
+            res.status(200).json(fetchFixture)
         }
         catch(err){
             next (err)
@@ -51,6 +52,24 @@ class indexControllers {
             });
             const fetchLeagueByCountry = league.data.response[0].league
             res.status(200).json(fetchLeagueByCountry)
+        }
+        catch(err){
+            next (err)
+        }
+    }
+
+    static async postBookmark (req, res, next) {
+        try {
+            console.log('testing')
+        }
+        catch(err){
+            next (err)
+        }
+    }
+
+    static async getBookmark (req, res, next) {
+        try {
+            console.log('testing')
         }
         catch(err){
             next (err)
