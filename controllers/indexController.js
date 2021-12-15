@@ -1,5 +1,6 @@
 const { User, Bookmark } = require("../models")
 const footballAPI = require("../apis/football")
+const bettingOdds = require("../apis/bettingOdds")
 // const axios = require('axios')
 
 class indexControllers {
@@ -70,6 +71,21 @@ class indexControllers {
     static async getBookmark (req, res, next) {
         try {
             console.log('testing')
+        }
+        catch(err){
+            next (err)
+        }
+    }
+
+    static async getOdds (req, res, next) {
+        try {
+            const oddsData = await bettingOdds({
+                method: 'GET',
+                url: '/oddsnames',
+            });
+
+            // const data = oddsData
+            console.log (oddsData.data)
         }
         catch(err){
             next (err)
