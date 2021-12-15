@@ -1,7 +1,6 @@
 const { User, Bookmark } = require("../models")
 const footballAPI = require("../apis/football")
 const bettingOdds = require("../apis/bettingOdds")
-// const axios = require('axios')
 
 class indexControllers {
     static async getFixture (req, res, next) {
@@ -83,9 +82,7 @@ class indexControllers {
                 method: 'GET',
                 url: '/oddsnames',
             });
-
-            // const data = oddsData
-            console.log (oddsData.data)
+            res.status(200).json(oddsData.data)
         }
         catch(err){
             next (err)
