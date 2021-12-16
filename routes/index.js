@@ -14,6 +14,8 @@ routes.get("/league/:country", indexController.getLeagueByCountry)
 
 routes.get("/odds", indexController.getOdds)
 
+routes.get("/youtube/:query", indexController.searchtrailer)
+
 routes.post("/bookmark/:fixtureId", indexController.postBookmark)
 routes.get("/bookmark/", indexController.getBookmark)
 

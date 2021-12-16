@@ -33,11 +33,6 @@ module.exports = (sequelize, DataTypes) => {
     },
     league: {
       type: DataTypes.STRING,
-      allowNull: false,
-      validate: {
-        notNull: { msg : "league is required"},
-        notEmpty: { msg: "league is required"}
-      }
     },
     venue: {
       type: DataTypes.STRING,

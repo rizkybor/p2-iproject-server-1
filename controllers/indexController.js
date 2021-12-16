@@ -1,6 +1,7 @@
 const { User, Bookmark } = require("../models")
 const footballAPI = require("../apis/football")
 const bettingOdds = require("../apis/bettingOdds")
+const youtubeSearch = require("../apis/youtube")
 
 class indexControllers {
     static async getFixture (req, res, next) {
@@ -13,9 +14,34 @@ class indexControllers {
                 params: {date: `${date}`}
             });
             const fetchFixture = fixture.data.response
-            res.status(200).json(fetchFixture)
+
+            const result = fetchFixture.map((value)=>{
+                let data = {
+                    id: value.fixture.id,
+                    date: new Date(value.fixture.date).toLocaleDateString(),
+                    time: new Date(value.fixture.date).toLocaleString({timeZone: "'Asia/Jakarta'"}).slice(11),
+                    stadium: value.fixture.venue.name,
+                    statusMatch: value.fixture.status.long,
+                    leagueName: value.league.name,
+                    home: value.teams.home,
+                    away: value.teams.away,
+                    scoreHalftime: {
+                        Home: value.score.halftime.home,
+                        Away: value.score.halftime.away,
+                    },
+                    scoreFulltime: {
+                        Home: value.score.fulltime.home,
+                        Away: value.score.fulltime.away,
+                    }
+                }
+                return data
+            })
+
+            res.status(200).json(result)
+          
         }
         catch(err){
+            console.log(err)
             next (err)
         }
     }
@@ -78,6 +104,7 @@ class indexControllers {
 
     static async getOdds (req, res, next) {
         try {
+          
             const oddsData = await bettingOdds({
                 method: 'GET',
                 url: '/oddsnames',
@@ -86,6 +113,29 @@ class indexControllers {
         }
         catch(err){
             next (err)
+        }
+    }
+
+    static async searchtrailer (req, res, next) {
+        try {
+            const {query} = req.params
+
+            const video = await youtubeSearch({
+                method: 'GET',
+                url: '/youtube-search/',
+                params: {q: `${query}`},
+            });
+
+            const resultVideo = video.data.items
+
+            let videoTrailer = {}
+            resultVideo.forEach((el)=>{
+                videoTrailer = el.url
+            })
+            res.status(200).json(videoTrailer)
+        }
+        catch(err){
+            next(err)
         }
     }
 }
