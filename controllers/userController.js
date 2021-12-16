@@ -12,6 +12,7 @@ class userController {
                 password,
                 role
             })
+
             if (newUser) {
                 res.status(201).json({
                     message: 'Registrasi Berhasil',
